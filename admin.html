@@ -11,6 +11,15 @@
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log("User signed out.");
+        });
+      }
+    </script>
     <script>
       function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
