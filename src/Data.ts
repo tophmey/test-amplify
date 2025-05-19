@@ -1,4 +1,32 @@
-const data = {
+
+type SizeDisplay = string;
+type SizeValue = number;
+
+export type SizeList = Record<SizeValue, SizeDisplay>
+
+export type Rules = 'default' | {
+    isLocal?: boolean;
+    sizes?: SizeList;
+    isRaw?: boolean;
+  }
+
+
+export interface Variety {
+    [name: string]: Rules;
+}
+  
+export type Data  =  {
+    varieties: Variety;
+    controls: {
+        sizes: SizeList
+        isLocal: boolean,
+        isRaw: boolean
+    }
+}
+
+
+
+const data: Data = {
   varieties: {
     Blueberry: "default",
     Buckwheat: "default",
@@ -25,8 +53,8 @@ const data = {
       64: "4 lb",
       80: "5 lb",
     },
-    isLocal: "boolean",
-    isRaw: "boolean",
+    isLocal: true,
+    isRaw: true,
   },
 };
 
@@ -47,31 +75,8 @@ export { data };
 // } as const;
 
 // type SizeDisplay = keyof typeof Sizes;
-
-type SizeDisplay = number;
-type SizeValue = string;
-
-export type SizeList = Record<SizeDisplay, SizeValue>
-
+  
 
 // export type SizeList = {
 //   readonly[key: SizeValue]: SizeDisplay;
 // }
-
-export type Rules = 'default' | {
-  isLocal?: boolean;
-  sizes?: SizeList;
-  isRaw?: boolean;
-}
-
-export interface Variety {
-  [name: string]: Rules;
-}
-
-// export type Control {
-
-// }
-
-export interface Data {
-    varieties: Variety;
-  }

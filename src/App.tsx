@@ -1,6 +1,5 @@
 import { useState, type ReactElement } from 'react'
-import { data } from './Data';
-import type { Rules, SizeList } from './Data';
+import { data, type Rules, type SizeList } from './Data'
 
 
 
@@ -11,10 +10,10 @@ const defaultRules = {
 
 function App() {
   const [name , setName] = useState("")
-  const controls: Rules = name && data.varieties[name]
+  const controls: null | Rules = name ? data.varieties[name] : null
   const isDefault = controls === 'default'
   const rules = isDefault ? defaultRules : controls;
-  const sizes: SizeList = rules.sizes ?? defaultRules.sizes;
+  const sizes: SizeList = rules?.sizes ?? defaultRules.sizes;
   return (
     <div>
       Create a card
