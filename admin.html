@@ -8,8 +8,18 @@
   </head>
   <body>
     <div id="root" class="top-level"></div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log("Name: " + profile.getName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
+    </script>
     <meta
       name="google-signin-client_id"
       content="1087016804991-qmt6os8ac1ulatqn50p765p9hq031mkr.apps.googleusercontent.com.apps.googleusercontent.com"
