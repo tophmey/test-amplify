@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, type ReactElement } from 'react'
+import { data } from './Data';
+import type { Rules, SizeList } from './Data';
+
+
+
+const defaultRules = {
+  sizes: data.controls.sizes,
+  isLocal: true
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [name , setName] = useState("")
+  const controls: Rules = name && data.varieties[name]
+  const isDefault = controls === 'default'
+  const rules = isDefault ? defaultRules : controls;
+  const sizes: SizeList = rules.sizes ?? defaultRules.sizes;
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      Create a card
+      <form>
+      <select title="Selector" onChange={({target}) => {setName(target.value)}}>
+        <option></option>
+        {Object.entries(data.varieties).map(([ name ]) => <option value={name} key={name}>{name}</option> )}
+      </select>
+      {controls && <Controls sizes={sizes} name={name} />}
+      {rules?.isLocal && <input type="hidden" value="isLocal" />}
+      </form>
+    </div>
   )
+}
+
+type ControlsProps = {
+  name: string;
+  sizes: SizeList;
+}
+
+function Controls({ name, sizes }: ControlsProps): ReactElement {
+  return <>
+    {/* {Object.entries(theseRules).map(([rule, options]) => typeof options === 'boolean' ? <label>{rule}<input id={rule} type="checkbox" readonly/></label> : <select title={`${name} ${rule}`} key={`${name}${rule}`}>
+      {Object.entries(options).map(([option, _display]) => <option key={option}>a</option>)}
+    </select>)} */}
+    <select title={`${name} sizes`}>
+      {Object.entries(sizes).map(([weight, size]) => <option key={weight}>{size}</option>)}
+    </select>
+    <br/>
+    <label>Labels to print:<input type="number" min="1" defaultValue={1}/></label>
+  </>
 }
 
 export default App
