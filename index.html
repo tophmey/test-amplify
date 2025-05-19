@@ -1,13 +1,356 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>World O’ Honey presents: Dad’s Honey Vinaigrette</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <!--[if !lte IE 7]><!-->
+    <link
+      rel="stylesheet"
+      href="assets/styles/main.css"
+      type="text/css"
+      media="screen,projection"
+    />
+    <!--<![endif]-->
+    <!--[if lte IE 7
+      ]><link
+        rel="stylesheet"
+        href="http://universal-ie6-css.googlecode.com/files/ie6.0.3.css"
+        media="screen, projection"
+    /><![endif]-->
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+
+  <body id="home">
+    <img
+      src="assets/images/dads-honey-vinaigrette-dressing.jpg"
+      class="bottle"
+      alt="World O’ Honey: Dad’s Honey Vinaigrette"
+      style="float: right"
+    />
+    <h1>World O’ Honey presents&hellip;</h1>
+    <h2>Dad’s Honey Vinaigrette</h2>
+    <div class="content">
+      <p>
+        It's sweet. It's delicious. And it goes with everything. This bottle
+        will be your kitchen's new all-star. Pour it over flank steaks, as a
+        marinade; drizzle it lightly on greens, herbs and walnuts to sweeten
+        your summer salad; or mix it up with rotini, tomatoes, cheese, and
+        pepperoni for an unforgettable pasta dish.
+      </p>
+      <p>
+        Dad's Honey Vinaigrette is a delicious, all-natural, salad dressing and
+        marinade that you'll love having around the kitchen, and it won't take
+        you long to find some new ways to use it, but if you do need some help,
+        check out our recipes. And if you have something we haven't thought of,
+        share it with us!
+      </p>
+      <p>
+        I truly believe in the health benefits that honey can provide, and I
+        want to pass them on to you. This is why I’ve chosen to include only
+        natural and wholesome ingredients in World O’ Honey products. Because,
+        like my Dad, I take great pride in my work.
+      </p>
+    </div>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+      <input type="hidden" name="cmd" value="_s-xclick" />
+      <input type="hidden" name="hosted_button_id" value="73NH25NRKL856" />
+      <input type="submit" value="Buy Now" id="buynow" />
+      <img
+        alt=""
+        border="0"
+        src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+        width="1"
+        height="1"
+      />
+      <p><b>12oz. bottles are $12.</b> Free local delivery and pickup.</p>
+    </form>
+
+    <div class="buckets">
+      <!--		<div>
+			<h3>Customer Reviews</h3>
+			<p>“I thought it was okay.”<br/>
+			<a href="#">@cjmemay</a> on Twitter</p>
+			<p>“Was the talking point of the garden party”<br/>
+			Glyn</p>
+			<p>"Wow Wow Wow! had us mesmerized by the colours"<br/>
+			<a href="#">Julia</a> on Facebook</p>
+		</div>
+		<div>
+			<h3>World O’ Recipes</h3>
+			<h4><a href="#">Dad‘s Honey Vinagrette Pasta Salad</a></h4>
+			<p>Was the talking point of the garden party. Wow Wow Wow! had us mesmerized by the colours.</p>
+			<h4><a href="#">The Perfect Salad</a></h4>
+			<p>Was the talking point of the garden party. Wow Wow Wow! had us mesmerized by the colours.</p>
+			<p><a href="#">View More Recipes&hellip;</a></p>
+		</div>-->
+      <div class="other_products">
+        <h3>Our Honey Products</h3>
+        <h4>
+          To order honey, send an email to
+          <a href="mailto:jean@worldohoney.com">jean@worldohoney.com</a>, or
+          contact us on
+          <a href="http://www.facebook.com/pages/World-O-Honey/195669433792714"
+            >facebook</a
+          >.
+        </h4>
+        <!-- <table> -->
+        <div class="honeys">
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">12 oz Bear Wildflower</span>
+              <span class="price">7.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">12 oz Bear Blueberry</span>
+              <span class="price">7.50</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">1 Lb Skep Blueberry</span>
+              <span class="price">9.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Skep Buckwheat</span>
+              <span class="price">9.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Skep Cranberry</span>
+              <span class="price">9.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Skep Wildflower</span>
+              <span class="price">9.00</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">8 oz Queenline Cranberry</span>
+              <span class="price">6.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">8 oz Queenline Blueberry</span>
+              <span class="price">6.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">8 oz Queenline Wildflower</span>
+              <span class="price">6.00</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">2 Lb Queenline Blueberry</span>
+              <span class="price">16.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">2 Lb Queenline Wildflower</span>
+              <span class="price">16.50</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">4 Lb Queenline</span>
+              <span class="price">30.00</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">1 Lb Creamed Honey Plain</span>
+              <span class="price">14.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Cinnamon Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Ginger Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Lemon Zest Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Orange Zest Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Pumpkin Spice Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Pecan Honey</span>
+              <span class="price">14.50</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Plain Honey</span>
+              <span class="price">14.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">1 Lb Creamed Vanilla Almond Honey</span>
+              <span class="price">14.50</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">1 Lb Chunk Honey</span>
+              <span class="price">14.00</span>
+            </div>
+            <div class="honey">
+              <span class="name">12 oz Natural Comb Honey</span>
+              <span class="price">17.00</span>
+            </div>
+          </div>
+          <div class="honey_group">
+            <div class="honey">
+              <span class="name">Honey Sticks (1)</span>
+              <span class="price">0.25</span>
+            </div>
+            <div class="honey">
+              <span class="name">Honey Sticks (5)</span>
+              <span class="price">1.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Get Social</h3>
+        <dl>
+          <dt>Twitter:</dt>
+          <dd>
+            <a href="http://www.twitter.com/worldohoney">@worldohoney</a>
+          </dd>
+          <dt>Facebook:</dt>
+          <dd>
+            <a
+              href="http://www.facebook.com/pages/World-O-Honey/195669433792714"
+              >World-O-Honey</a
+            >
+          </dd>
+          <dt>Email:</dt>
+          <dd>
+            <a href="mailto:jean@worldohoney.com">jean@worldohoney.com</a>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <!--	<ul id="nav">
+		<li><a href="/about" title="About World O’ Honey">About</a></li>
+		<li><a href="/buy" title="Stores that carry our goods">Where to Buy</a></li>
+		<li><a href="/contact" title="How to contact World O’ Honey">Contact</a></li>
+	</ul> -->
+    <p class="copyright">
+      &copy; 2015
+      <a href="http://hirechrismeyers.com/">Christopher Meyers</a> &amp;
+      <a href="http://www.worldohoney.com/">World O’ Honey, Inc.</a>
+    </p>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
+
+      ga("create", "UA-487643-8", "auto");
+      ga("send", "pageview");
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-487643-8");
+        pageTracker._trackPageview();
+      } catch (err) {}
+      var buyNow = document.querySelector("#buynow");
+      buyNow.addEventListener(
+        "click",
+        ga("send", "event", "button", "click", "nav buttons", 8)
+      );
+    </script>
+    <script>
+      (function () {
+        "use strict";
+
+        var SPREADSHEET_URL =
+          "https://spreadsheets.google.com/feeds/list/1WSukJ89pq-MLH47tRvJp9lwnc_oRTYPD28r6eXQVqmk/od6/public/values?alt=json";
+
+        var DEV_DOMAIN = "hirechrismeyers";
+        if (window.location.hostname.indexOf(DEV_DOMAIN) !== -1) {
+          SPREADSHEET_URL =
+            "https://spreadsheets.google.com/feeds/list/1WSukJ89pq-MLH47tRvJp9lwnc_oRTYPD28r6eXQVqmk/op54asy/public/values?alt=json";
+        }
+
+        var request = new XMLHttpRequest();
+
+        function processSpreadsheet() {
+          var content = JSON.parse(this.responseText);
+          var rows = content.feed.entry;
+          var categories = {};
+
+          for (var row of rows) {
+            var price = row.gsx$price.$t.trim();
+            var name = row.gsx$desc.$t.trim();
+            var category = row.gsx$group.$t.trim();
+
+            var result = {
+              price: price,
+              name: name,
+            };
+
+            if ("undefined" === typeof categories[category]) {
+              categories[category] = [];
+            }
+
+            categories[category].push(result);
+          }
+
+          var productContainer = document.querySelector(".honeys");
+          productContainer.innerHTML = "";
+
+          for (var category in categories) {
+            var thisCategory = categories[category];
+            var groupElement = document.createElement("div");
+            groupElement.className = "honey_group";
+
+            for (var item of thisCategory) {
+              var productElement = document.createElement("div");
+              productElement.className = "honey";
+
+              var nameElement = document.createElement("span");
+              nameElement.innerText = item.name;
+              nameElement.className = "name";
+              productElement.appendChild(nameElement);
+
+              var priceElement = document.createElement("span");
+              priceElement.innerText = item.price;
+              priceElement.className = "price";
+              productElement.appendChild(priceElement);
+
+              groupElement.appendChild(productElement);
+            }
+            productContainer.appendChild(groupElement);
+          }
+        }
+
+        request.open("GET", SPREADSHEET_URL);
+
+        request.addEventListener("load", processSpreadsheet);
+
+        request.send();
+      })();
+    </script>
   </body>
 </html>
