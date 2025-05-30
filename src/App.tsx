@@ -1,4 +1,4 @@
-import React, { useState, type FC, type ReactNode } from "react";
+import React, { useState, type ReactNode } from "react";
 import { data, type Rules, type SizeList } from "./Data";
 import Card from "./Card";
 import "@fontsource/roboto/300.css";
@@ -15,8 +15,6 @@ import {
   Container,
   Divider,
   Drawer,
-  Fab,
-  FormControlLabel,
   Grid,
   List,
   ListItem,
@@ -25,13 +23,10 @@ import {
   Snackbar,
   SnackbarContent,
   Stack,
-  Switch,
   TextField,
-  ToggleButton,
   Toolbar,
   Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -73,126 +68,126 @@ function getCard(params: CardDataOverwrite = {}): CardData {
 
 type CardState = null | CardData;
 const defaultCards: CardData[] = [
-  /* this should remain */
-];
-const otherCards = [
+  //   /* this should remain */
+  // ];
+  // const otherCards = [
   {
     name: "Blueberry",
-    size: "2 lb",
+    size: "32",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "1 lb",
+    size: "16",
     isLocal: true,
     quantity: 7,
   },
   {
     name: "Blueberry",
-    size: "2.5 lb",
+    size: "40",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "5 lb",
+    size: "80",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "12 oz",
+    size: "12",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "2 lb",
+    size: "32",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "1 lb",
+    size: "16",
     isLocal: true,
     quantity: 7,
   },
   {
     name: "Blueberry",
-    size: "2.5 lb",
+    size: "40",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "5 lb",
+    size: "80",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Tupelo",
-    size: "8 oz",
+    size: "8",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "2 lb",
+    size: "32",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "1 lb",
+    size: "16",
     isLocal: true,
     quantity: 7,
   },
   {
     name: "Blueberry",
-    size: "2.5 lb",
+    size: "40",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "5 lb",
+    size: "80",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "12 oz",
+    size: "12",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "2 lb",
+    size: "32",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Blueberry",
-    size: "1 lb",
+    size: "16",
     isLocal: true,
     quantity: 7,
   },
   {
     name: "Blueberry",
-    size: "2.5 lb",
+    size: "40",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Orange Blossom",
-    size: "5 lb",
+    size: "80",
     isLocal: true,
     quantity: 5,
   },
   {
     name: "Tupelo",
-    size: "1 lb",
+    size: "16",
     isLocal: true,
     quantity: 5,
   },
@@ -222,8 +217,11 @@ type Tally = {
 
 const CARDS_PER_PAGE = 10;
 
+type Group = CardData[];
+// type Section = Group[];
+
 export default function App() {
-  const [cards, setCards] = useState(defaultCards);
+  const [cards, setCards] = useState<Group>(defaultCards);
   const [lastRemovedCard, setLastRemovedCard] = useState<null | CardData>(null);
   const [editorError, setEditorError] = useState<null | {
     message: string;
@@ -232,6 +230,28 @@ export default function App() {
   const [isEditing, setIsEditing] = React.useState<null | undefined | number>(
     null
   );
+  // const [isGroupOn, setIsGroupOn] = React.useState(true);
+  const [groupBy, setGroupBy] = React.useState<keyof CardData | "">("");
+  const [sortBy, setSortBy] = React.useState<keyof CardData | "">("");
+  const isGroupOn = !!groupBy;
+  const groups =
+    !isGroupOn || !groupBy
+      ? [cards]
+      : cards.reduce((acc: CardData[][], card) => {
+          const groupProp = groupBy || "name";
+          if (
+            !acc
+              .find(groupMatchingCardName)
+              ?.sort((a, b) => (!sortBy ? 0 : a[sortBy] < b[sortBy] ? -1 : 1))
+              .push(card)
+          ) {
+            acc.push([card]);
+          }
+          return acc;
+          function groupMatchingCardName([first]: CardData[]) {
+            return first?.[groupProp] === card[groupProp];
+          }
+        }, []);
   const editCard =
     isEditing === null
       ? null
@@ -361,35 +381,108 @@ export default function App() {
             <Toolbar />
 
             <Container>
-              <Grid container spacing={5} direction="row">
-                <Grid>
-                  <Stack>
-                    <Typography>Total Labels:</Typography>
-                    <Box>{cardTally.count}</Box>
-                  </Stack>
+              <Grid container spacing={3} direction="row">
+                <Grid size={2}>
+                  {/* <Typography>Total Labels:</Typography>
+                    <Box>{cardTally.count}</Box> */}
+                  <TextField
+                    size="small"
+                    id="total-select"
+                    defaultValue={`${cardTally.count}`}
+                    label="Total labels"
+                    slotProps={{ input: { readOnly: true } }}
+                  />
                 </Grid>
-                <Grid>
-                  <Stack>
+                <Grid size={2}>
+                  <TextField
+                    size="small"
+                    id="total-select"
+                    defaultValue={`${totalPages}`}
+                    label="Total pages"
+                    slotProps={{ input: { readOnly: true } }}
+                  />
+                  {/* <Stack>
                     <Box>Total pages:</Box>
                     <Box>{totalPages}</Box>
-                  </Stack>
+                    </Stack> */}
                 </Grid>
-                <Grid>
-                  <Stack>
+                <Grid size={2}>
+                  <TextField
+                    size="small"
+                    id="total-select"
+                    defaultValue={`${blankCardsCount}`}
+                    label="Blank spots"
+                    slotProps={{ input: { readOnly: true } }}
+                    aria-readonly
+                  />
+                  {/* <Stack>
                     <Box>Blank spots:</Box>
                     <Box>{blankCardsCount}</Box>
-                  </Stack>
+                  </Stack> */}
                 </Grid>
-                <Grid>
+                <Grid size={2}>
                   {/* <Stack direction="row" spacing={4}> */}
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     labelPlacement="top"
-                    control={<Switch defaultChecked />}
+                    control={<Switch checked={isGroupOn} />}
                     label="Group labels"
                     onChange={(_, checked) => {
-                      console.log(checked);
+                      setIsGroupOn(checked);
                     }}
-                  />
+                  /> */}
+                  <FormControl size="small" fullWidth>
+                    <InputLabel id="groupby-label">Group By</InputLabel>
+                    <Select
+                      labelId="groupby-label"
+                      id="groupby-select"
+                      value={groupBy}
+                      label="Group By"
+                      onChange={(event: SelectChangeEvent) => {
+                        setGroupBy(event.target.value as string);
+                      }}
+                    >
+                      <MenuItem value="">None</MenuItem>
+                      {Object.entries({ name: "", size: "", isLocal: "" }).map(
+                        ([key]: string[]) => (
+                          <MenuItem value={key} key={key}>
+                            {key.toLocaleUpperCase()}
+                          </MenuItem>
+                        )
+                      )}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid size={2}>
+                  {/* <Stack direction="row" spacing={4}> */}
+                  {/* <FormControlLabel
+                    labelPlacement="top"
+                    control={<Switch checked={isGroupOn} />}
+                    label="Group labels"
+                    onChange={(_, checked) => {
+                      setIsGroupOn(checked);
+                    }}
+                  /> */}
+                  <FormControl size="small" fullWidth>
+                    <InputLabel id="sortby-label">Sort By</InputLabel>
+                    <Select
+                      labelId="sortby-label"
+                      id="sortby-select"
+                      value={sortBy}
+                      label="Sort By"
+                      onChange={(event: SelectChangeEvent) => {
+                        setSortBy(event.target.value as string);
+                      }}
+                    >
+                      <MenuItem value="">None</MenuItem>
+                      {Object.entries({ name: "", size: "", isLocal: "" })
+                        .filter(([key]) => key !== groupBy)
+                        .map(([key]: string[]) => (
+                          <MenuItem value={key} key={key}>
+                            {key.toLocaleUpperCase()}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid sx={{ marginRight: 0, marginLeft: "auto" }}>
                   <Button
@@ -413,8 +506,7 @@ export default function App() {
                 >
                 <AddIcon />
                 </Fab> */}
-              <Grid container spacing={5}>
-                {/* <Grid>
+              {/* <Grid>
                   <Button
                     variant="contained"
                     onClick={() => {
@@ -424,49 +516,69 @@ export default function App() {
                     <div>Create Label</div>
                   </Button>
                 </Grid> */}
-                {cards.map((card, index) => (
-                  <Grid key={index}>
-                    <Stack>
-                      <Badge
-                        badgeContent={card.quantity}
-                        color="primary"
-                        anchorOrigin={{
-                          vertical: "bottom",
-                        }}
-                      >
-                        <Grid
-                          sx={{
-                            lineHeight: 0,
-                            boxShadow: (theme) => theme.shadows[3],
-                          }}
-                        >
-                          <Button
-                            onClick={() => {
-                              setIsEditing(index);
-                            }}
-                          >
-                            {card.name}
-                            <br />
-                            {card.size}
-                          </Button>
-                        </Grid>
-                      </Badge>
-                      <Button
-                        onClick={() => {
-                          setCards((currentCards) =>
-                            currentCards.filter(
-                              (currentCard) => currentCard !== card
-                            )
-                          );
-                          setLastRemovedCard(card);
-                        }}
-                      >
-                        Remove
-                      </Button>
-                    </Stack>
-                  </Grid>
-                ))}
-              </Grid>
+              {groups.map((group) => {
+                return (
+                  <Container key={group[0]?.[groupBy || "name"]}>
+                    {(isGroupOn || groupBy) && (
+                      <React.Fragment>
+                        <Typography variant="h6">
+                          {group[0]?.[groupBy || "name"]}
+                        </Typography>
+                        <br />
+                      </React.Fragment>
+                    )}
+                    <Grid container spacing={5}>
+                      {group.map((card, index) => {
+                        return (
+                          <Grid key={index}>
+                            <Stack>
+                              <Badge
+                                badgeContent={card.quantity}
+                                color="primary"
+                                anchorOrigin={{
+                                  vertical: "bottom",
+                                }}
+                              >
+                                <Grid
+                                  sx={{
+                                    lineHeight: 0,
+                                    boxShadow: (theme) => theme.shadows[3],
+                                  }}
+                                >
+                                  <Button
+                                    onClick={() => {
+                                      setIsEditing(index);
+                                    }}
+                                  >
+                                    {card.name}
+                                    <br />
+                                    {card.size}
+                                  </Button>
+                                </Grid>
+                              </Badge>
+                              <Button
+                                onClick={() => {
+                                  setCards((currentCards) =>
+                                    currentCards.filter(
+                                      (currentCard) => currentCard !== card
+                                    )
+                                  );
+                                  setLastRemovedCard(card);
+                                }}
+                              >
+                                Remove
+                              </Button>
+                            </Stack>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                    <br />
+                    <Divider />
+                    <br />
+                  </Container>
+                );
+              })}
               <br />
               <Modal
                 open={!!editCard}
@@ -590,7 +702,7 @@ function Editor({
               >
                 {sizes &&
                   Object.entries(sizes).map(([weight, size]) => (
-                    <MenuItem value={size} key={weight}>
+                    <MenuItem value={weight} key={weight}>
                       {size}
                     </MenuItem>
                   ))}
