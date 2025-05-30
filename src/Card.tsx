@@ -1,4 +1,5 @@
 import React from "react";
+import { data } from "./Data";
 
 const WIDTH = 1050;
 const HEIGHT = 600;
@@ -13,6 +14,8 @@ type CardProps = {
   isLocal?: boolean;
   debug?: boolean;
 };
+
+const sizes = data.controls.sizes;
 
 export default function CardFront({
   name = "",
@@ -31,13 +34,11 @@ export default function CardFront({
       ctx.font = "bold 31px Times New Roman";
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
-      if (typeof isLocal !== "undefined") {
-        ctx.fillText(
-          `Raw ${isLocal ? "Local " : ""}Honey`,
-          150,
-          BORDER_WIDTH * 2
-        );
-      }
+      ctx.fillText(
+        `Raw ${isLocal ? "Local " : ""}Honey`,
+        150,
+        BORDER_WIDTH * 2
+      );
       ctx.fillText(name, 150, 110);
       ctx.textAlign = "left";
       ctx.font = "24px Times New Roman";
@@ -50,9 +51,11 @@ export default function CardFront({
       ctx.textAlign = "center";
       ctx.fillText("Packaged By", 525, 50);
       ctx.fillText(`Licensed by PA Dept of Ag.`, 525, BOTTOM_BORDER);
-      ctx.textAlign = "right";
-      ctx.font = "bold 24px Times New Roman";
-      ctx.fillText(`Net Wt. ${size}`, RIGHT_BORDER, BOTTOM_BORDER);
+      if (size) {
+        ctx.textAlign = "right";
+        ctx.font = "bold 24px Times New Roman";
+        ctx.fillText(`Net Wt. ${sizes[size]}`, RIGHT_BORDER, BOTTOM_BORDER);
+      }
     });
     img.src = "/woh-logo.png";
     return () => {

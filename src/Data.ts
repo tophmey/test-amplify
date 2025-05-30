@@ -39,24 +39,24 @@ const defaultValues = Object.freeze({
     isRaw: true,
 });
 
-const data: Data = {
-  varieties: {
+const data: Data = Object.freeze({
+  varieties: Object.freeze({
     Blueberry: "default",
     Buckwheat: "default",
     Clover: "default",
     Cranberry: "default",
     "Orange Blossom": { isLocal: false },
     Wildflower: "default",
-    Tupelo: {
+    Tupelo: Object.freeze({
       isLocal: false,
-      sizes: {
+      sizes: Object.freeze({
         8: "8 oz",
         16: "1 lb",
-      }
-    },
-  },
+      })
+    }),
+  }),
   controls: defaultValues
-};
+});
 
 export { data };
 
