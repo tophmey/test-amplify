@@ -24,7 +24,20 @@ export type Data  =  {
     }
 }
 
-
+const defaultValues = Object.freeze({
+    sizes: {
+        8: "8 oz",
+        12: "12 oz",
+        16: "1 lb",
+        32: "2 lb",
+        40: "2.5 lb",
+        48: "3 lb",
+        64: "4 lb",
+        80: "5 lb",
+    },
+    isLocal: true,
+    isRaw: true,
+});
 
 const data: Data = {
   varieties: {
@@ -42,20 +55,7 @@ const data: Data = {
       }
     },
   },
-  controls: {
-    sizes: {
-      8: "8 oz",
-      12: "12 oz",
-      16: "1 lb",
-      32: "2 lb",
-      40: "2.5 lb",
-      48: "3 lb",
-      64: "4 lb",
-      80: "5 lb",
-    },
-    isLocal: true,
-    isRaw: true,
-  },
+  controls: defaultValues
 };
 
 export { data };
