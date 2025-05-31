@@ -687,6 +687,9 @@ export default function App() {
               );
             })}
             <br />
+            <br />
+            <br />
+            <br />
             <Modal
               open={!!editCard}
               onClose={() => {
@@ -835,12 +838,12 @@ function Editor({
                 },
               }}
             />
-            <Typography>
+            {/* <Typography>
               {(10 + blankCardsCount - (quantity % 10)) % CARDS_PER_PAGE} unused
               spots left on the last sheet.
-            </Typography>
+            </Typography> */}
           </Grid>
-          <Grid size={6}>
+          {/* <Grid size={6}>
             <FormControlLabel
               control={<Checkbox />}
               label="Local"
@@ -849,7 +852,7 @@ function Editor({
               }}
               checked={isLocal}
             />
-          </Grid>
+          </Grid> */}
           <Grid size={12} justifyContent={"flex-end"} container>
             {onRemove && (
               <Button
@@ -871,7 +874,9 @@ function Editor({
             )}
             <Button
               variant="contained"
-              disabled={!name || !size}
+              disabled={
+                !name || !rules?.sizes?.find((validSize) => validSize === size)
+              }
               onClick={() => {
                 const result = onSave({
                   name,
