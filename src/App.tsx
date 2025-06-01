@@ -46,7 +46,7 @@ function logAndReturn(value: any) {
   console.trace(value);
   return value;
 }
-console.log(logAndReturn);
+logAndReturn("loaded");
 
 type Quantity = number;
 type Weight = number;
@@ -456,4 +456,4 @@ function Controls({
     </FormControl>
   );
 }
-console.log(Controls);
+Controls({ groups: [], setGroups: () => [] });
