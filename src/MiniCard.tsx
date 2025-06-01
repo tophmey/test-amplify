@@ -3,9 +3,9 @@ import React from "react";
 const WIDTH = 131;
 const HEIGHT = 75;
 const BORDER_WIDTH = 10;
-const RIGHT_BORDER = WIDTH - BORDER_WIDTH;
+// const RIGHT_BORDER = WIDTH - BORDER_WIDTH;
 // const LEFT_BORDER = BORDER_WIDTH;
-const BOTTOM_BORDER = HEIGHT - BORDER_WIDTH;
+// const BOTTOM_BORDER = HEIGHT - BORDER_WIDTH;
 
 type CardProps = {
   name: string;

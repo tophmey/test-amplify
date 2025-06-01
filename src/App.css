@@ -41,12 +41,42 @@
   color: #888;
 } */
 
-.admin-controls {
-  display: block;
+.print-labels {
+  line-height: 0;
+}
+@media screen {
+  .admin-controls {
+    display: block;
+  }
+  .print-labels {
+  zoom: 0.25;
+  width: 2100px;
+  margin: 0 auto;
+  display: none;
+
+  canvas {
+    outline: 1px solid;
+  }
 }
 
+}
 @media print {
+  @page {
+    size: 2550px 3300px;
+    margin-left: 215px;
+    margin-top: 138px;
+  }
+  .print-labels {
+    .error-message {
+      margin-top: 10vh;
+      font-size: 120px;
+      line-height: 1.8;
+    }
+  }
+  
   .admin-controls {
     display: none;
   }
 }
+
+

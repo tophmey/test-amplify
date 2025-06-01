@@ -11,12 +11,12 @@ export type Rules = 'default' | {
   }
 
 
-export interface Variety {
-    [name: string]: Rules;
-}
-  
+export type Variety =  string;
+// export type Variety = "Blueberry" | "Buckwheat" | "Clover" | "Cranberry" | "Orange Blossom" | "Wildflower" | "Tupelo";
+type Varieties = Record<Variety, Rules>
+
 export type Data  =  {
-    varieties: Variety;
+    varieties: Varieties;
     controls: {
         sizes: SizeList
         isLocal: boolean,

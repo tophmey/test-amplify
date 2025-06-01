@@ -5,14 +5,14 @@ const WIDTH = 1050;
 const HEIGHT = 600;
 const BORDER_WIDTH = 30;
 const RIGHT_BORDER = WIDTH - BORDER_WIDTH;
-const LEFT_BORDER = BORDER_WIDTH;
+// const LEFT_BORDER = BORDER_WIDTH;
 const BOTTOM_BORDER = HEIGHT - BORDER_WIDTH;
 
 type CardProps = {
   name: string;
   size: string;
   isLocal?: boolean;
-  debug?: boolean;
+  isRaw?: boolean;
 };
 
 const sizes = data.controls.sizes;
@@ -20,7 +20,16 @@ const sizes = data.controls.sizes;
 export default function CardFront({
   name = "",
   size = "",
-  isLocal,
+  isLocal = name &&
+  data.varieties[name] !== "default" &&
+  "isLocal" in data.varieties[name]
+    ? data.varieties[name].isLocal
+    : data.controls.isLocal, // data[name]?.isLocal || data.controls.isLocal,
+  isRaw = name &&
+  data.varieties[name] !== "default" &&
+  "isRaw" in data.varieties[name]
+    ? data.varieties[name].isRaw
+    : data.controls.isRaw,
 }: CardProps) {
   const ref = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
@@ -35,7 +44,7 @@ export default function CardFront({
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText(
-        `Raw ${isLocal ? "Local " : ""}Honey`,
+        `${isRaw ? "Raw " : ""} ${isLocal ? "Local " : ""}Honey`,
         150,
         BORDER_WIDTH * 2
       );
@@ -54,7 +63,7 @@ export default function CardFront({
       if (size) {
         ctx.textAlign = "right";
         ctx.font = "bold 24px Times New Roman";
-        ctx.fillText(`Net Wt. ${sizes[size]}`, RIGHT_BORDER, BOTTOM_BORDER);
+        ctx.fillText(`Net Wt. ${sizes[+size]}`, RIGHT_BORDER, BOTTOM_BORDER);
       }
     });
     img.src = "/woh-logo.png";
