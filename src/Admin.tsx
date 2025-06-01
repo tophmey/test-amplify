@@ -53,7 +53,7 @@ function App() {
         )}
         {rules?.isLocal && <input type="hidden" value="isLocal" />}
       </form>
-      {controls && size && <Card />}
+      {controls && size && <Card name="" size="" />}
     </div>
   );
 }
