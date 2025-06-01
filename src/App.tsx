@@ -30,7 +30,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { ExpandMore, Print, Send } from "@mui/icons-material";
+import { ExpandMore, Print } from "@mui/icons-material";
 import CardFront from "./Card";
 import CardBack from "./CardBack";
 import EmptyCards from "./CardEmpty";
@@ -61,10 +61,8 @@ type VarietyTally = { [name: string]: Quantity };
 type TallyCollection = { tally: Quantity; tallies: VarietyTally };
 const ALL_VARIETIES = "all";
 
-const DEFAULT_QUANTITY =
-  (localStorage.getItem("saved") &&
-    JSON.parse(localStorage.getItem("saved"))) ||
-  {};
+const storedData = localStorage.getItem("saved");
+const DEFAULT_QUANTITY = storedData ? JSON.parse(storedData) : {};
 
 export default function App() {
   const [activeName, setActiveName] = useState<Variety | "">("");
